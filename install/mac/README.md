@@ -6,7 +6,7 @@
 
 ## 📁 文件说明
 
-- `com.jcu.auto-network.plist` - launchd服务配置文件模板
+- `com.jcu.auto-network.plist` - launchd服务配置模板
 - `install.sh` - 自启动服务安装脚本
 - `uninstall.sh` - 自启动服务卸载脚本
 - `README.md` - 本说明文件
@@ -16,7 +16,7 @@
 ### 1. 安装自启动服务
 
 ```bash
-cd /Users/misyra/JCU_auto_network/install/mac
+cd /path/to/JCU_auto_network/install/mac
 bash install.sh
 ```
 
@@ -27,7 +27,7 @@ bash install.sh
 launchctl list | grep com.jcu.auto-network
 
 # 查看运行日志
-tail -f /Users/misyra/JCU_auto_network/logs/jcu-auto-network.log
+tail -f ~/JCU_auto_network/logs/jcu-auto-network.log
 ```
 
 ## 🔧 服务管理
@@ -62,10 +62,10 @@ launchctl list | grep com.jcu.auto-network
 ### 查看实时日志
 ```bash
 # 查看标准日志
-tail -f /Users/misyra/JCU_auto_network/logs/jcu-auto-network.log
+tail -f ~/JCU_auto_network/logs/jcu-auto-network.log
 
 # 查看错误日志
-tail -f /Users/misyra/JCU_auto_network/logs/jcu-auto-network-error.log
+tail -f ~/JCU_auto_network/logs/jcu-auto-network-error.log
 ```
 
 ## ⚙️ 配置说明
@@ -105,10 +105,10 @@ grep -A1 ProgramArguments ~/Library/LaunchAgents/com.jcu.auto-network.plist
 检查主程序配置：
 ```bash
 # 查看.env配置文件
-cat /Users/misyra/JCU_auto_network/.env
+cat ~/JCU_auto_network/.env
 
 # 手动测试程序
-cd /Users/misyra/JCU_auto_network
+cd ~/JCU_auto_network
 python3 app_cli.py
 ```
 
@@ -117,11 +117,11 @@ python3 app_cli.py
 清理旧日志：
 ```bash
 # 清空日志文件
-> /Users/misyra/JCU_auto_network/logs/jcu-auto-network.log
-> /Users/misyra/JCU_auto_network/logs/jcu-auto-network-error.log
+> ~/JCU_auto_network/logs/jcu-auto-network.log
+> ~/JCU_auto_network/logs/jcu-auto-network-error.log
 
 # 或删除日志目录（下次启动会自动创建）
-rm -rf /Users/misyra/JCU_auto_network/logs/
+rm -rf ~/JCU_auto_network/logs/
 ```
 
 ### 4. 服务状态异常
@@ -138,7 +138,7 @@ bash install.sh
 ## 🗑️ 卸载服务
 
 ```bash
-cd /Users/misyra/JCU_auto_network/install/mac
+cd /path/to/JCU_auto_network/install/mac
 bash uninstall.sh
 ```
 

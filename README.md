@@ -1,68 +1,67 @@
-# 🌐 JCU校园网自动认证工具
+# JCU校园网自动认证工具
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](#支持平台)
 
-> 🚀 基于 Playwright 的校园网自动认证工具，支持 GUI 图形界面和 CLI 命令行双模式操作
+基于 Playwright 的校园网自动认证工具，提供图形界面和命令行两种使用方式。
 
-## 📋 目录
+## 目录
 
-- [✨ 项目特色](#-项目特色)
-- [🎯 核心功能](#-核心功能)
-- [🚀 快速开始](#-快速开始)
-- [📱 使用指南](#-使用指南)
-- [⚙️ 配置说明](#️-配置说明)
-- [🏗️ 技术架构](#️-技术架构)
-- [🔧 高级配置](#-高级配置)
-- [❓ 故障排除](#-故障排除)
-- [📄 安全声明](#-安全声明)
-- [🤝 贡献指南](#-贡献指南)
+- [项目介绍](#项目介绍)
+- [主要功能](#主要功能)
+- [安装教程](#安装教程)
+- [使用说明](#使用说明)
+- [配置文件](#配置文件)
+- [技术架构](#技术架构)
+- [常见问题](#常见问题)
+- [开发贡献](#开发贡献)
 
-## ✨ 项目特色
+## 项目介绍
 
-- 🖥️ **双模式支持**：提供 GUI 图形界面和 CLI 命令行两种使用方式
-- 🔄 **智能监控**：自动检测网络状态，断网时自动重新认证
-- 🕐 **时段控制**：支持设置暂停登录时间段，避免深夜频繁认证
-- 🌙 **后台运行**：支持无头模式和守护进程模式，静默后台运行
-- 📊 **实时日志**：详细的运行日志和状态监控
-- ⚡ **高性能**：基于 Playwright 浏览器自动化，稳定可靠
-- 🛡️ **安全可靠**：本地存储配置，不上传任何敏感信息
+这个工具是为了解决校园网频繁掉线需要重新认证的问题而开发的。主要特点包括：
 
-## 🎯 核心功能
+- **双模式支持**：既有直观的图形界面，也支持命令行操作
+- **智能监控**：自动检测网络状态，断线时自动重新登录
+- **时段控制**：可以设置夜间暂停时间，避免深夜频繁认证打扰休息
+- **后台运行**：支持无界面模式，静默在后台工作
+- **详细日志**：记录所有操作，方便问题排查
+- **安全可靠**：所有配置都保存在本地，不会泄露个人信息
 
-### 🔐 自动认证功能
-- 智能识别多种校园网认证页面
-- 支持移动、联通、电信等多运营商
-- 自动填写用户名密码并提交认证
-- 认证结果智能判断和异常处理
+## 主要功能
 
-### 📡 网络监控功能
+### 自动认证
+- 支持多种校园网认证系统
+- 兼容移动、联通、电信等运营商
+- 自动填写账号密码并提交认证
+- 智能判断认证结果和异常处理
+
+### 网络监控
 - 定期检测网络连通性（Socket + HTTP 双重验证）
 - 网络异常时自动触发重新认证
 - 可配置检测间隔时间
 - 智能重试机制，避免频繁认证
 
-### 🎮 双模式操作支持
+### 操作模式
 - **GUI 模式**：直观的图形界面，适合日常使用
 - **CLI 模式**：命令行操作，支持后台守护进程
 
-### ⏰ 暂停时段设置
+### 时间管理
 - 支持设置夜间暂停登录时间段
 - 避免深夜网络波动导致的频繁认证
 - 灵活的时间配置，支持跨天设置
 
-## 🚀 快速开始
+## 安装教程
 
-### 📋 系统要求
+### 系统要求
 
 - **Python**: 3.10 或更高版本
 - **操作系统**: Windows 10+, macOS 10.14+, Ubuntu 18.04+
-- **网络**: 校园网环境
+- **网络环境**: 需要连接到校园网
 
-### 🔧 安装步骤
+### 安装方式
 
-#### 方法一：使用 uv（推荐）
+#### 方式一：使用 uv（推荐）
 
 ```bash
 # 1. 克隆项目
@@ -82,7 +81,7 @@ uv sync
 uv run playwright install chromium
 ```
 
-#### 方法二：使用 pip
+#### 方式二：使用 pip
 
 ```bash
 # 1. 克隆项目
@@ -105,17 +104,36 @@ pip install -r requirements.txt
 playwright install chromium
 ```
 
-#### Windows 一键安装
+#### Windows 一键安装（推荐）
+
+对于 Windows 用户，提供了更简单的安装方式：
 
 ```bash
-# 运行 Windows 环境配置脚本
-cd install/windows
+# 下载项目
+git clone https://github.com/Misyra/JCU_auto_network.git
+cd JCU_auto_network
+
+# 运行安装脚本
+cd install\windows
 install.bat
 ```
 
-### ⚡ 快速启动
+安装脚本会自动完成以下操作：
+- 检查 Python 环境
+- 配置国内镜像源加速下载
+- 安装所有项目依赖
+- 安装 Playwright 浏览器驱动
+- 让用户选择 GUI 或 CLI 启动模式
+- 在项目根目录生成“一键启动.bat”
+- 可选配置开机自启动（支持 GUI/CLI 模式选择）
 
-#### GUI 模式（推荐新手）
+### 启动程序
+
+#### Windows 用户
+
+如果使用了 Windows 一键安装，直接双击项目根目录下的“一键启动.bat”即可。
+
+#### GUI 模式
 
 ```bash
 # 使用 uv
@@ -141,11 +159,29 @@ uv run app_cli.py --status
 uv run app_cli.py --stop
 ```
 
-## 📱 使用指南
+## 使用说明
 
-### 🖥️ GUI 模式使用
+### Windows 一键启动
 
-1. **首次配置**
+完成安装后，有以下几种使用方式：
+
+1. **直接运行**
+   - 双击项目根目录下的 `一键启动.bat`
+   - 脚本会根据安装时的选择启动相应模式
+
+2. **开机自启动**
+   - 如果在安装时配置了开机自启动，系统重启后会自动运行
+   - 支持 GUI 模式（显示界面）和 CLI 模式（后台运行）
+
+3. **管理开机自启动**
+   ```
+   要取消开机自启动，删除以下文件：
+   %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\校园网认证.bat
+   ```
+
+### GUI 模式使用
+
+1. **初始配置**
    - 启动程序后，在登录配置区域填写：
      - 账号：学号 + 运营商后缀（如：123456@cmcc）
      - 密码：校园网登录密码
@@ -154,7 +190,7 @@ uv run app_cli.py --stop
 
 2. **开始监控**
    - 点击「开始监控」按钮启动自动认证
-   - 程序将定期检测网络状态
+   - 程序会定期检测网络状态
    - 发现网络异常时自动进行认证
 
 3. **手动操作**
@@ -163,15 +199,15 @@ uv run app_cli.py --stop
    - 「网络测试」：测试当前网络连通性
    - 「保存配置」：保存当前配置到文件
 
-4. **监控选项**
-   - ☑️ 启动时自动运行：程序启动后自动开始监控
-   - ☑️ 后台静默运行：使用无头模式，不显示浏览器窗口
-   - ☑️ 暂停登录时段：设置夜间暂停时间，避免频繁认证
+4. **选项设置**
+   - 启动时自动运行：程序启动后自动开始监控
+   - 后台静默运行：使用无头模式，不显示浏览器窗口
+   - 暂停登录时段：设置夜间暂停时间，避免频繁认证
 
-### 💻 CLI 模式使用
+### CLI 模式使用
 
 ```bash
-# 查看帮助
+# 查看帮助信息
 python app_cli.py --help
 
 # 前台运行（适合调试）
@@ -187,7 +223,7 @@ python app_cli.py --status
 python app_cli.py --stop
 ```
 
-### 🚀 macOS 系统服务安装
+### macOS 系统服务
 
 ```bash
 # 安装为系统启动服务
@@ -198,9 +234,9 @@ cd install/mac
 ./uninstall.sh
 ```
 
-## ⚙️ 配置说明
+## 配置文件
 
-### 📝 配置文件 (.env)
+### 主配置文件 (.env)
 
 项目使用 `.env` 文件存储配置信息，首次运行会自动创建：
 
@@ -234,7 +270,7 @@ LOG_MAX_SIZE=2097152                 # 日志文件最大大小(字节)
 LOG_BACKUP_COUNT=5                   # 日志备份文件数量
 ```
 
-### 🔧 运营商配置
+### 运营商配置
 
 | 运营商 | 后缀代码 | 说明 |
 |--------|----------|------|
@@ -243,9 +279,9 @@ LOG_BACKUP_COUNT=5                   # 日志备份文件数量
 | 中国电信 | @telecom | China Telecom |
 | 教育网 | @edu | Education Network |
 
-## 🏗️ 技术架构
+## 技术架构
 
-### 📁 项目结构
+### 项目结构
 
 ```
 JCU_auto_network/
@@ -258,17 +294,20 @@ JCU_auto_network/
 │   │   ├── install.sh       # 系统服务安装
 │   │   └── uninstall.sh     # 系统服务卸载
 │   └── windows/             # Windows 安装脚本
-│       ├── install.bat      # 环境配置脚本
-│       └── build_exe.bat    # 程序打包脚本
+│       ├── install.bat      # 一键安装配置脚本
+│       ├── setup_environment.bat # 完整环境配置脚本
+│       ├── uninstall.bat    # 卸载清理脚本
+│       └── README.md        # Windows安装说明
 ├── logs/                    # 日志文件目录
 ├── app.py                   # GUI 主程序
 ├── app_cli.py               # CLI 主程序
+├── 一键启动.bat             # Windows一键启动脚本（安装时生成）
 ├── pyproject.toml           # 项目配置
 ├── requirements.txt         # 依赖列表
 └── .env                     # 配置文件
 ```
 
-### 🔄 架构设计
+### 架构设计
 
 ```mermaid
 graph TD
@@ -298,7 +337,7 @@ graph TD
     C --> H
 ```
 
-### 🧩 核心组件
+### 核心组件
 
 - **NetworkMonitorCore**: 监控核心，封装完整的网络监控逻辑
 - **EnhancedCampusNetworkAuth**: 基于 Playwright 的认证处理器
@@ -306,9 +345,9 @@ graph TD
 - **LoggerSetup**: 日志系统管理
 - **TimeUtils**: 时间相关工具函数
 
-## 🔧 高级配置
+## 高级配置
 
-### 🎛️ 性能优化
+### 性能优化
 
 ```bash
 # 启用低资源模式
@@ -321,7 +360,7 @@ MONITOR_INTERVAL=600  # 10分钟检测一次
 BROWSER_HEADLESS=true
 ```
 
-### 🔐 安全配置
+### 安全配置
 
 ```bash
 # 设置配置文件权限（仅限 Unix 系统）
@@ -331,7 +370,7 @@ chmod 600 .env
 echo ".env" >> .gitignore
 ```
 
-### 📊 日志配置
+### 日志配置
 
 ```bash
 # 详细日志（调试用）
@@ -344,11 +383,50 @@ LOG_LEVEL=INFO
 LOG_LEVEL=ERROR
 ```
 
-## ❓ 故障排除
+## 常见问题
 
-### 🔧 常见问题
+### 问题排查
 
-#### 问题1：无法启动浏览器
+#### 问题1：Windows安装失败
+
+**症状**：运行 `install.bat` 时出现错误
+
+**解决方案**：
+```bash
+# 1. 检查Python环境
+python --version
+
+# 2. 手动安装依赖
+python -m pip install -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple --trusted-host mirrors.tuna.tsinghua.edu.cn -r requirements.txt
+
+# 3. 安装浏览器驱动
+python -m playwright install chromium
+```
+
+#### 问题2：一键启动无法运行
+
+**症状**：双击 `一键启动.bat` 后无反应
+
+**排查步骤**：
+1. 检查文件是否存在：项目根目录下的 `一键启动.bat`
+2. 手动运行：`python app.py` 或 `python app_cli.py`
+3. 检查日志：查看 `logs/` 目录下的日志文件
+
+#### 问题3：开机自启动不生效
+
+**症状**：重启后程序未自动运行
+
+**解决方案**：
+```bash
+# 检查启动文件夹中是否有相关文件
+# 按 Win + R，输入：shell:startup
+# 查看是否存在：校园网认证.bat
+
+# 手动测试启动脚本
+# 双击运行启动文件夹中的文件
+```
+
+#### 问题4：无法启动浏览器
 
 **症状**：程序报错 "Executable doesn't exist"
 
@@ -361,7 +439,7 @@ playwright install chromium
 playwright install --help
 ```
 
-#### 问题2：认证失败
+#### 问题5：认证失败
 
 **症状**：显示认证失败或无法访问认证页面
 
@@ -371,7 +449,7 @@ playwright install --help
 3. 检查账号密码：确认用户名包含正确的运营商后缀
 4. 尝试手动登录：使用浏览器手动访问认证页面
 
-#### 问题3：程序无响应
+#### 问题6：程序无响应
 
 **症状**：GUI 界面卡死或 CLI 无输出
 
@@ -387,7 +465,26 @@ python app_cli.py --stop
 rm -f /tmp/campus_auth_*.pid
 ```
 
-#### 问题4：日志文件过大
+#### 问题8：CLI后台模式无法启动
+
+**症状**：运行 `python app_cli.py --daemon` 后服务状态显示未运行
+
+**解决方案**：
+```bash
+# 1. 确保已安装依赖包
+pip install -r requirements.txt
+
+# 2. 检查虚拟环境是否激活
+# Windows: venv\Scripts\activate
+# macOS/Linux: source venv/bin/activate
+
+# 3. 测试前台运行
+python app_cli.py
+
+# 4. Windows系统的守护进程支持有限，建议使用GUI模式或任务计划程序
+```
+
+#### 问题9：日志文件过大
 
 **症状**：logs 目录占用空间过大
 
@@ -402,7 +499,7 @@ LOG_MAX_SIZE=1048576      # 1MB
 LOG_BACKUP_COUNT=3        # 保留3个备份
 ```
 
-### 🐛 调试模式
+### 调试模式
 
 ```bash
 # 启用详细日志
@@ -415,33 +512,33 @@ export BROWSER_HEADLESS=false
 python app.py
 ```
 
-### 📞 获取帮助
+### 获取帮助
 
 如果遇到无法解决的问题：
 
-1. 📋 检查日志文件：`logs/campus_auth.log`
-2. 🐛 提交 Issue：[GitHub Issues](https://github.com/Misyra/JCU_auto_network/issues)
-3. 📖 查看文档：项目 Wiki 页面
+1. 检查日志文件：`logs/campus_auth.log`
+2. 提交 Issue：[GitHub Issues](https://github.com/Misyra/JCU_auto_network/issues)
+3. 查看文档：项目 Wiki 页面
 
-## 📄 安全声明
+## 安全声明
 
-### ⚠️ 重要声明
+### 重要声明
 
 1. **合法使用**: 本工具仅供学习和研究使用，请遵守学校网络使用规定
 2. **数据安全**: 所有配置信息均存储在本地，不会上传到任何服务器
 3. **开源透明**: 项目完全开源，欢迎审查代码安全性
 4. **责任免责**: 使用本工具产生的任何问题由用户自行承担
 
-### 🛡️ 隐私保护
+### 隐私保护
 
-- ✅ 密码仅保存在本地 `.env` 文件中
-- ✅ 不收集任何用户个人信息
-- ✅ 不向第三方服务器发送数据
-- ✅ 支持配置文件加密存储
+- 密码仅保存在本地 `.env` 文件中
+- 不收集任何用户个人信息
+- 不向第三方服务器发送数据
+- 支持配置文件加密存储
 
-## 🤝 贡献指南
+## 开发贡献
 
-### 💡 如何贡献
+### 如何贡献
 
 1. **Fork 项目**
 2. **创建特性分支**: `git checkout -b feature/AmazingFeature`
@@ -449,7 +546,7 @@ python app.py
 4. **推送分支**: `git push origin feature/AmazingFeature`
 5. **提交 Pull Request**
 
-### 🐛 Bug 报告
+### Bug 报告
 
 提交 Bug 时请包含：
 - 操作系统和版本
@@ -457,13 +554,13 @@ python app.py
 - 错误信息和日志
 - 复现步骤
 
-### ✨ 功能建议
+### 功能建议
 
 欢迎提交功能建议和改进意见！
 
 ---
 
-## 📊 支持平台
+## 支持平台
 
 | 平台 | GUI | CLI | 服务模式 |
 |------|-----|-----|----------|
@@ -472,18 +569,18 @@ python app.py
 | Ubuntu 18.04+ | ✅ | ✅ | ✅ |
 | CentOS 7+ | ❌ | ✅ | ✅ |
 
-## 📈 版本历史
+## 版本历史
 
 - **v1.0.0** - 初始版本，支持基本认证功能
 - **v1.1.0** - 添加 GUI 界面和配置管理
 - **v1.2.0** - 增加暂停时段和性能优化
 - **v1.3.0** - 支持多平台部署和系统服务
 
-## 📄 许可证
+## 许可证
 
 本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
 
-## 🙏 致谢
+## 致谢
 
 - [Playwright](https://playwright.dev/) - 浏览器自动化框架
 - [python-dotenv](https://github.com/theskumar/python-dotenv) - 环境变量管理
@@ -493,7 +590,7 @@ python app.py
 
 <div align="center">
 
-**⭐ 如果这个项目对你有帮助，请给个 Star！⭐**
+**如果这个项目对你有帮助，请给个 Star！**
 
 [报告 Bug](https://github.com/Misyra/JCU_auto_network/issues) · [功能建议](https://github.com/Misyra/JCU_auto_network/issues) · [贡献代码](https://github.com/Misyra/JCU_auto_network/pulls)
 
